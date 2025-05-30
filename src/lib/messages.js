@@ -53,6 +53,7 @@ export const introMessage = [
   "",
   "Happy coding! 🚀",
   ""
+];	
 export const errorMessage = [
 	color + "CheerpX could not start" + normal,
 	"",
