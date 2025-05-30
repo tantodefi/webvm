@@ -1,4 +1,4 @@
-name: Deploy
+name: Deploy_mini
 
 # Define when the workflow should run
 on:
