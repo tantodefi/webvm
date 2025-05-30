@@ -26,7 +26,7 @@ export const introMessage = [
   "",
   "💬 Convos: https://tantodefi.convos.org/", 
   "🐦 Twitter: https://x.com/tantodefi",
-  "💜 Farcaster: https://https://farcaster.xyz/tantodefi,
+  "💜 Farcaster: https://https://farcaster.xyz/tantodefi",
   "🐙 GitHub: https://github.com/tantodefi/",
   "",
   "+---------------------------------------------------------------------------+",
