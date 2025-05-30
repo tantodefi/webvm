@@ -3,12 +3,13 @@
 	import { get } from 'svelte/store';
 	import Nav from 'labs/packages/global-navbar/src/Nav.svelte';
 	import SideBar from '$lib/SideBar.svelte';
+	import MediaQuery from '$lib/MediaQuery.svelte';
 	import '$lib/global.css';
 	import '@xterm/xterm/css/xterm.css'
 	import '@fortawesome/fontawesome-free/css/all.min.css'
 	import { networkInterface, startLogin } from '$lib/network.js'
 	import { cpuActivity, diskActivity, cpuPercentage, diskLatency } from '$lib/activities.js'
-	import { introMessage, errorMessage, unexpectedErrorMessage } from '$lib/messages.js'
+	import { introMessage, introMessageMobile, errorMessage, unexpectedErrorMessage } from '$lib/messages.js'
 	import { displayConfig, handleToolImpl } from '$lib/anthropic.js'
 	import { tryPlausible } from '$lib/plausible.js'
 
@@ -27,6 +28,8 @@
 	var processCount = 0;
 	var curVT = 0;
 	var sideBarPinned = false;
+	var isMobile = false;
+
 	function writeData(buf, vt)
 	{
 		if(vt != 1)
@@ -184,6 +187,9 @@
 		if(display)
 			setScreenSize(display);
 	}
+	function isMobileDevice() {
+		return window.matchMedia('(max-width: 768px)').matches;
+	}
 	async function initTerminal()
 	{
 		const { Terminal } = await import('@xterm/xterm');
@@ -213,7 +219,7 @@
 		curInnerWidth = window.innerWidth;
 		curInnerHeight = window.innerHeight;
 		if(configObj.printIntro)
-			printMessage(introMessage);
+			printMessage(isMobile ? introMessageMobile : introMessage);
 		try
 		{
 			await initCheerpX();
@@ -359,6 +365,14 @@
 		triggerResize();
 	}
 </script>
+
+<MediaQuery query="(max-width: 768px)" let:matches>
+	{#if matches}
+		{@const tmp = isMobile = true}
+	{:else}
+		{@const tmp = isMobile = false}
+	{/if}
+</MediaQuery>
 
 <main class="relative w-full h-full">
 	<Nav />
