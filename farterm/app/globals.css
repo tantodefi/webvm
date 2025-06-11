@@ -1,0 +1,68 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  html {
+    @apply h-full bg-terminal-bg text-terminal-text;
+  }
+  body {
+    @apply h-full;
+  }
+  #root {
+    @apply h-full;
+  }
+}
+
+@font-face {
+  font-family: 'JetBrains Mono';
+  src: url('/fonts/JetBrainsMono-Regular.woff2') format('woff2');
+  font-weight: normal;
+  font-style: normal;
+  font-display: swap;
+}
+
+:root {
+  --background: #ffffff;
+  --foreground: #111111;
+}
+
+@media (prefers-color-scheme: dark) {
+  :root {
+    --background: #111111;
+    --foreground: #ffffff;
+  }
+}
+
+body {
+  color: var(--foreground);
+  background: var(--background);
+  font-family: "Geist", sans-serif;
+  font-optical-sizing: auto;
+  font-weight: 400;
+  font-style: normal;
+  font-size: 80%;
+}
+
+/* Fix xterm.js selection colors for better readability */
+.xterm .xterm-selection-layer .xterm-selection {
+  background: rgba(68, 71, 90, 0.6) !important; /* Semi-transparent purple background */
+}
+
+.xterm.focus .xterm-selection-layer .xterm-selection {
+  background: rgba(68, 71, 90, 0.8) !important; /* Darker when focused */
+}
+
+/* Ensure text remains visible when selected */
+.xterm .xterm-rows .xterm-row .xterm-char-layer .xterm-char.xterm-char-selected {
+  color: #f8f8f2 !important; /* Light text on dark selection */
+}
+
+/* Additional selection styling for better contrast */
+.xterm .xterm-selection-layer {
+  pointer-events: none;
+}
+
+.xterm .xterm-selection-layer .xterm-selection {
+  border-radius: 2px;
+}
